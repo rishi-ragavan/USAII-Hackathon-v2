@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ga-001",
+    "address": "412 Pine Hollow Rd",
+    "city": "Tifton", "state": "GA", "zip": "31794",
+    "county": "Tift County", "fips": "13277", "censusTract": "13277960300",
+    "lat": 31.4505, "lng": -83.5085,
+    "price": 145000, "beds": 3, "baths": 2, "sqft": 1450,
+    "propertyType": "Single Family",
+    "photo": "https://picsum.photos/seed/ga001/800/600"
+  },
+  {
+    "id": "oh-002",
+    "address": "2207 W 58th St",
+    "city": "Cleveland", "state": "OH", "zip": "44102",
+    "county": "Cuyahoga County", "fips": "39035", "censusTract": "39035102400",
+    "lat": 41.4742, "lng": -81.7299,
+    "price": 98000, "beds": 3, "baths": 1, "sqft": 1280,
+    "propertyType": "Single Family",
+    "photo": "https://picsum.photos/seed/oh002/800/600"
+  },
+  {
+    "id": "tx-003",
+    "address": "8134 Glenvista St",
+    "city": "Houston", "state": "TX", "zip": "77061",
+    "county": "Harris County", "fips": "48201", "censusTract": "48201323500",
+    "lat": 29.6566, "lng": -95.2899,
+    "price": 189000, "beds": 3, "baths": 2, "sqft": 1520,
+    "propertyType": "Single Family",
+    "photo": "https://picsum.photos/seed/tx003/800/600"
+  },
+  {
+    "id": "mi-004",
+    "address": "15740 Rosemont Ave",
+    "city": "Detroit", "state": "MI", "zip": "48223",
+    "county": "Wayne County", "fips": "26163", "censusTract": "26163540400",
+    "lat": 42.3942, "lng": -83.2185,
+    "price": 75000, "beds": 4, "baths": 2, "sqft": 1600,
+    "propertyType": "Single Family",
+    "photo": "https://picsum.photos/seed/mi004/800/600"
+  },
+  {
+    "id": "az-005",
+    "address": "3622 E Bellevue St",
+    "city": "Tucson", "state": "AZ", "zip": "85716",
+    "county": "Pima County", "fips": "04019", "censusTract": "04019002701",
+    "lat": 32.2284, "lng": -110.9119,
+    "price": 210000, "beds": 3, "baths": 2, "sqft": 1340,
+    "propertyType": "Single Family",
+    "photo": "https://picsum.photos/seed/az005/800/600"
+  },
+  {
+    "id": "ia-006",
+    "address": "905 Pammel Ct",
+    "city": "Ames", "state": "IA", "zip": "50014",
+    "county": "Story County", "fips": "19169", "censusTract": "19169000800",
+    "lat": 42.0156, "lng": -93.6483,
+    "price": 130000, "beds": 2, "baths": 1, "sqft": 980,
+    "propertyType": "Townhouse",
+    "photo": "https://picsum.photos/seed/ia006/800/600"
+  }
+]
