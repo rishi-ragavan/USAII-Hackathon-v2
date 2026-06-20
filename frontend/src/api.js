@@ -1,18 +1,19 @@
 import mock from "./data/listings.json";
 
-// Demo runs off curated low-income-qualifying homes (reliable, on-message).
-// Set VITE_SIMPLYRETS_KEY in frontend/.env to pull live listings instead.
-// Public demo creds are simplyrets:simplyrets (no real key needed to try it).
+// Demo runs off curated $150–300K aid-qualifying homes (reliable, on-message).
+// To pull LIVE SimplyRETS listings instead, set BOTH in frontend/.env:
+//   VITE_USE_LIVE=1
+//   VITE_SIMPLYRETS_KEY=simplyrets:simplyrets   (public demo creds, user:pass)
 
 export async function getListings() {
+  const live = import.meta.env.VITE_USE_LIVE === "1";
   const key = import.meta.env.VITE_SIMPLYRETS_KEY;
-  if (!key) return mock;
+  if (!live || !key) return mock;
   try {
     const res = await fetch("https://api.simplyrets.com/properties?limit=20", {
-      headers: { Authorization: "Basic " + btoa(key) }, // key = "user:pass"
+      headers: { Authorization: "Basic " + btoa(key) },
     });
-    const live = await res.json();
-    return live.map(normalize);
+    return (await res.json()).map(normalize);
   } catch {
     return mock; // never break the demo
   }
@@ -26,7 +27,7 @@ function normalize(p) {
     state: p.address?.state ?? "",
     zip: p.address?.postalCode ?? "",
     county: p.geo?.county ?? "",
-    fips: "", censusTract: "",            // live feed lacks these; geocode if needed
+    fips: "", censusTract: "",
     lat: p.geo?.lat ?? 0, lng: p.geo?.lng ?? 0,
     price: p.listPrice ?? 0,
     beds: p.property?.bedrooms ?? 0,
