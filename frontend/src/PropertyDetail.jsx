@@ -35,9 +35,10 @@ export default function PropertyDetail({ property: p, profile, onBack }) {
             <div className="row"><span>First-time buyer</span><b>{profile.firstTimeBuyer ? "Yes" : "No"}</b></div>
             <div className="row"><span>Savings</span><b>{usd(profile.savings)}</b></div>
             <div className="row"><span>Current rent + utilities</span><b>{usd(profile.currentRent + profile.currentUtilities)}/mo</b></div>
+            <div className="row"><span>Edit details</span><b style={{ color: "var(--brand)" }}>Use “Your info” ↑</b></div>
           </div>
 
-          {/* Person 2 fills this */}
+          {/* Person 2: backend affordability + programs */}
           <EligibilityPanel property={p} profile={profile} />
           {/* Person 3 fills this */}
           <LendersPanel property={p} profile={profile} />

@@ -32,7 +32,25 @@ export default function ProfileDrawer({ profile, setProfile, onClose }) {
 
         <label className="label">Savings for down payment</label>
         <input className="input" type="number" value={profile.savings || ""}
-          onChange={set("savings")} placeholder="3500" />
+          onChange={set("savings")} placeholder="12000" />
+
+        <label className="label">Credit score (FICO)</label>
+        <input className="input" type="number" value={profile.creditScore || ""}
+          onChange={set("creditScore")} placeholder="680" />
+
+        <label className="label">Monthly non-housing debt</label>
+        <input className="input" type="number" value={profile.monthlyDebt || ""}
+          onChange={set("monthlyDebt")} placeholder="250" />
+
+        <label className="label">Profession</label>
+        <select className="input" value={profile.profession ?? "other"}
+          onChange={(e) => setProfile({ ...profile, profession: e.target.value })}>
+          <option value="other">Other / Standard</option>
+          <option value="teacher">Teacher</option>
+          <option value="police">Police Officer</option>
+          <option value="firefighter">Firefighter</option>
+          <option value="emt">EMT / First Responder</option>
+        </select>
 
         <label className="label">Current monthly rent</label>
         <input className="input" type="number" value={profile.currentRent || ""}

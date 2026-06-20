@@ -13,8 +13,9 @@ export default function App() {
   const [selected, setSelected] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
   const [profile, setProfile] = useState({
-    income: 42000, householdSize: 4, savings: 3500,
+    income: 42000, householdSize: 4, savings: 12000,
     currentRent: 1200, currentUtilities: 280,
+    creditScore: 680, monthlyDebt: 250, profession: "teacher",
     firstTimeBuyer: true, veteran: false,
   });
 
