@@ -1,6 +1,7 @@
 import EligibilityPanel from "./EligibilityPanel";
 import LendersPanel from "./LendersPanel";
 import PriceHistory from "./PriceHistory";
+import MonthlyCost from "./MonthlyCost";
 
 const usd = (n) => "$" + n.toLocaleString();
 
@@ -25,6 +26,7 @@ export default function PropertyDetail({ property: p, profile, onBack }) {
           </div>
 
           <PriceHistory property={p} />
+          <MonthlyCost property={p} profile={profile} />
         </div>
 
         <div>
