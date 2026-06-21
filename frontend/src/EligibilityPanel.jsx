@@ -1,12 +1,42 @@
 import { useEffect, useState } from "react";
+import { leave } from "./linkout";
 
 const usd = (n) => "$" + Math.round(n).toLocaleString();
 const pct = (n) => (n * 100).toFixed(1) + "%";
+
+// Plain-language blurb + official link, shown when a program card is clicked.
+const PROGRAM_INFO = {
+  va: { blurb: "Backed by the VA for veterans and active-duty military. 0% down and no monthly mortgage insurance.",
+    url: "https://www.va.gov/housing-assistance/home-loans/" },
+  usda: { blurb: "Backed by the USDA for homes in eligible rural and small-town areas. 0% down, with household income limits.",
+    url: "https://www.rd.usda.gov/programs-services/single-family-housing-programs" },
+  fha: { blurb: "Government-insured loan with just 3.5% down and a credit score as low as 580 — the most common first-time-buyer path.",
+    url: "https://www.hud.gov/buying/loans" },
+  homeready: { blurb: "Fannie Mae loan for lower-income buyers: 3% down with reduced mortgage insurance.",
+    url: "https://www.fanniemae.com/education/homeready-mortgage" },
+  conv20: { blurb: "A standard loan with 20% down and no mortgage insurance — the lowest monthly cost if you can cover the down payment.",
+    url: "https://www.consumerfinance.gov/owning-a-home/loan-options/conventional-loans/" },
+  gnnd: { blurb: "Teachers, police, firefighters, and EMTs can buy eligible HUD-listed homes at 50% off the list price.",
+    url: "https://www.hud.gov/program_offices/housing/sfh/reo/goodn/gnndabout" },
+};
 
 export default function EligibilityPanel({ property, profile }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [open, setOpen] = useState(null);
+
+  const Detail = ({ id }) => {
+    const info = PROGRAM_INFO[id];
+    if (!info || open !== id) return null;
+    return (
+      <div className="prog-detail">
+        <p>{info.blurb}</p>
+        <a className="prog-link" href={info.url} onClick={leave(info.url)}>Apply / learn more ↗</a>
+      </div>
+    );
+  };
+  const toggle = (id) => setOpen(open === id ? null : id);
 
   useEffect(() => {
     let active = true;
@@ -88,7 +118,8 @@ export default function EligibilityPanel({ property, profile }) {
       ) : (
         <div className="program-list">
           {data.qualified_programs.map((p) => (
-            <div key={p.program_id} className="program-card qualified">
+            <div key={p.program_id} className="program-card qualified clickable"
+              onClick={() => toggle(p.program_id)}>
               <div className="program-header">
                 <span className="program-name">{p.name}</span>
                 <span className="program-rate">{p.interest_rate}% APR</span>
@@ -112,6 +143,7 @@ export default function EligibilityPanel({ property, profile }) {
                   <b>{pct(p.dti_ratio)}</b>
                 </div>
               </div>
+              <Detail id={p.program_id} />
             </div>
           ))}
         </div>
@@ -122,12 +154,14 @@ export default function EligibilityPanel({ property, profile }) {
           <h3 style={{ marginTop: 24 }}>Other Programs Checked ({data.unqualified_programs.length})</h3>
           <div className="program-list unqualified-list">
             {data.unqualified_programs.map((p) => (
-              <div key={p.program_id} className="program-card unqualified">
+              <div key={p.program_id} className="program-card unqualified clickable"
+                onClick={() => toggle(p.program_id)}>
                 <div className="program-header">
                   <span className="program-name">{p.name}</span>
                   <span className="badge-not-eligible">Not Qualified</span>
                 </div>
                 <p className="reason-text">{p.reason}</p>
+                <Detail id={p.program_id} />
               </div>
             ))}
           </div>

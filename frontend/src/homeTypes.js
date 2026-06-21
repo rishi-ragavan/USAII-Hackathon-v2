@@ -1,0 +1,26 @@
+// Home classifications a buyer must know — each can change the loan/process.
+// Sourced from NerdWallet/Chase/Rocket/Redfin buyer guides + HUD 24 CFR 3280, FHA 203(k).
+export const HOME_TYPES = [
+  { id: "single_family", name: "Single-Family (detached)",
+    note: "Standard process. Most loans and assistance programs apply." },
+  { id: "condo", name: "Condominium",
+    note: "Lender must approve the condo project (FHA/VA-approved list). HOA dues count toward your budget." },
+  { id: "townhouse", name: "Townhouse",
+    note: "Usually fee-simple — you own the land. Financed like a single-family, often with an HOA." },
+  { id: "coop", name: "Co-op",
+    note: "You buy shares in a corporation, not the unit. Needs a share loan (not a normal mortgage) + board approval." },
+  { id: "multi_2_4", name: "Multi-family (2–4 units)",
+    note: "Residential financing if you live in one unit; rental income can help you qualify, but cash reserves are required." },
+  { id: "manufactured", name: "Manufactured / Mobile (HUD-code)",
+    note: "Must be titled as real property (affixed to land) for FHA/conventional loans; otherwise only chattel loans." },
+  { id: "modular", name: "Modular",
+    note: "Built to state codes; treated as site-built for lending." },
+  { id: "new_construction", name: "New Construction",
+    note: "May need a construction/builder loan and inspections at each milestone." },
+  { id: "fixer_203k", name: "Fixer-upper (needs repairs)",
+    note: "An FHA 203(k) loan can finance the home + renovations in a single mortgage." },
+  { id: "foreclosure_reo", name: "Foreclosure / Bank-owned (REO)",
+    note: "Sold as-is. REO allows inspection & financing; raw auctions usually require cash same-day." },
+  { id: "short_sale", name: "Short sale / Pre-foreclosure",
+    note: "The seller's lender must approve the discounted price — expect long, uncertain timelines." },
+];

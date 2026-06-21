@@ -3,6 +3,7 @@ import { getListings } from "./api";
 import PropertyDetail from "./PropertyDetail";
 import InfoScreen from "./InfoScreen";
 import ResourcesScreen from "./ResourcesScreen";
+import AboutScreen from "./AboutScreen";
 
 const usd = (n) => "$" + n.toLocaleString();
 const kfmt = (n) => (n >= 1000 ? (n / 1000).toFixed(1) + "k" : String(n));
@@ -11,7 +12,7 @@ const DEFAULT_PROFILE = {
   income: 42000, householdSize: 4, savings: 12000,
   currentRent: 1200, currentUtilities: 280, currentSqft: 1100, currentState: "GA",
   creditScore: 680, monthlyDebt: 250, profession: "teacher",
-  employmentType: "w2", immigrationStatus: "citizen",
+  employmentType: "w2", immigrationStatus: "citizen", homeType: "single_family",
   firstTimeBuyer: true, veteran: false,
 };
 const loadProfile = () => {
@@ -56,7 +57,8 @@ export default function App() {
     localStorage.setItem("homestead_profile", JSON.stringify(profile));
   }, [profile]);
 
-  const goHome = () => { setSelected(null); setScreen("home"); };
+  const navTo = (s) => () => { setSelected(null); setScreen(s); };
+  const goHome = navTo("home");
 
   useEffect(() => { getListings().then(setListings); }, []);
 
@@ -87,8 +89,9 @@ export default function App() {
         <button className="logo" onClick={goHome} title="Home">Home<span>stead</span></button>
         <div className="tagline">Keeping the American Dream within reach</div>
         <div className="spacer" />
-        <button className="btn-link" onClick={() => setScreen("resources")}>Resources</button>
-        <button className="btn-ghost" onClick={() => setScreen("info")}>Your info</button>
+        <button className="btn-link" onClick={navTo("about")}>About</button>
+        <button className="btn-link" onClick={navTo("resources")}>Resources</button>
+        <button className="btn-ghost" onClick={navTo("info")}>Your info</button>
       </nav>
 
       {selected ? (
@@ -100,9 +103,11 @@ export default function App() {
         <div className="wrap">
           <InfoScreen profile={profile} setProfile={setProfile} onDone={goHome} />
         </div>
+      ) : screen === "about" ? (
+        <div className="wrap"><AboutScreen /></div>
       ) : screen === "resources" ? (
         <div className="wrap">
-          <ResourcesScreen profile={profile} onEdit={() => setScreen("info")} />
+          <ResourcesScreen profile={profile} onEdit={navTo("info")} />
         </div>
       ) : (
         <div className="wrap">

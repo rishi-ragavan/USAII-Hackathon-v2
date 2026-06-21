@@ -1,4 +1,5 @@
 import { evaluatePrograms, GENERAL } from "./programs";
+import { leave } from "./linkout";
 
 export default function ResourcesScreen({ profile, onEdit }) {
   const { qualified, other } = evaluatePrograms(profile);
@@ -18,7 +19,7 @@ export default function ResourcesScreen({ profile, onEdit }) {
             <div className="res-tag">{r.tag}</div>
             <h4>{r.name}</h4>
             <p>{r.benefit}</p>
-            <a className="res-link" href={r.url} target="_blank" rel="noreferrer">Apply / learn more ↗</a>
+            <a className="res-link" href={r.url} onClick={leave(r.url)}>Apply / learn more ↗</a>
           </div>
         ))}
         {qualified.length === 0 && <p className="stub">Add your income and details to see programs.</p>}
@@ -46,7 +47,7 @@ export default function ResourcesScreen({ profile, onEdit }) {
             <div className="res-tag">{r.tag}</div>
             <h4>{r.name}</h4>
             <p>{r.desc}</p>
-            <a className="res-link" href={r.url} target="_blank" rel="noreferrer">Open ↗</a>
+            <a className="res-link" href={r.url} onClick={leave(r.url)}>Open ↗</a>
           </div>
         ))}
       </div>

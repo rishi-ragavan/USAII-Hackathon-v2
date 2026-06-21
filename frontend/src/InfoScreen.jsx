@@ -1,3 +1,5 @@
+import { HOME_TYPES } from "./homeTypes";
+
 // ponytail: heuristic snapshot for the demo; Person 2's HUD-AMI engine replaces this.
 function aidSnapshot(p) {
   const out = [];
@@ -101,6 +103,21 @@ export default function InfoScreen({ profile, setProfile, onDone }) {
             <option value="itin_undocumented">ITIN / no SSN</option>
           </select>
         </div>
+        <div>
+          <label className="label">Type of home you're considering</label>
+          <select className="input" value={profile.homeType ?? "single_family"} onChange={setStr("homeType")}>
+            {HOME_TYPES.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
+          </select>
+        </div>
+      </div>
+
+      <div className="snapshot" style={{ background: "var(--surface-2)" }}>
+        <h4>Know your home type — each can change the loan or process</h4>
+        {HOME_TYPES.map((t) => (
+          <div key={t.id} className={"type" + (profile.homeType === t.id ? " on" : "")}>
+            <b>{t.name}</b><span>{t.note}</span>
+          </div>
+        ))}
       </div>
 
       <label className="label">First-time buyer?</label>
